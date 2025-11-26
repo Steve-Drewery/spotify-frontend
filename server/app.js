@@ -55,6 +55,8 @@ app.get("/login", function (req, res) {
   console.log("Login endpoint hit from:", req.headers.origin || req.headers.referer);
   console.log("Using redirect_uri:", redirect_uri);
   console.log("Using client_id:", client_id);
+  console.log("Frontend URL:", frontend_url);
+  console.log("Allowed origins:", allowedOrigins);
   var state = generateRandomString(16);
   
   // Set cookie with proper options for cross-origin requests
@@ -95,12 +97,14 @@ app.get("/callback", function (req, res) {
   console.log("State check - received:", state, "stored:", storedState);
 
   if (state === null || state !== storedState) {
+    console.error("State mismatch - redirecting to frontend with error");
     res.redirect(
-      "/#" +
+      frontend_url + "/#" +
         querystring.stringify({
           error: "state_mismatch",
         })
     );
+    return;
   } else {
     res.clearCookie(stateKey);
     var authOptions = {
