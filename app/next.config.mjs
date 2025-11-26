@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  // Netlify plugin will handle the build output
+};
 
 export default nextConfig;
 

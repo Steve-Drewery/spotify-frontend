@@ -30,7 +30,7 @@ This guide will help you deploy the Spotify Music Video Player to production.
    - `NODE_ENV` = `production`
    - `SPOTIFY_CLIENT_ID` = Your Spotify Client ID
    - `SPOTIFY_CLIENT_SECRET` = Your Spotify Client Secret
-   - `SPOTIFY_REDIRECT_URI` = `https://your-render-app.onrender.com/callback`
+   - `SPOTIFY_REDIRECT_URI` = `https://spotify-frontend-aaq4.onrender.com/callback`
    - `FRONTEND_URL` = `https://your-netlify-app.netlify.app` (you'll get this after Step 2)
    - `ALLOWED_ORIGINS` = `https://your-netlify-app.netlify.app`
    - `PORT` = Leave empty (Render sets this automatically)
@@ -53,8 +53,8 @@ This guide will help you deploy the Spotify Music Video Player to production.
 3. Connect your GitHub repository
 4. Configure build settings:
    - **Base directory**: `app`
-   - **Build command**: `npm install && npm run build`
-   - **Publish directory**: `.next`
+   - **Build command**: `npm ci && npm run build`
+   - **Publish directory**: Leave empty (Netlify Next.js plugin handles this automatically)
 5. Add Environment Variables (Site settings → Environment variables):
    - `NEXT_PUBLIC_BACKEND_URL` = `https://your-render-app.onrender.com`
    - `NEXT_PUBLIC_YOUTUBE_API_KEY` = Your YouTube API key
@@ -83,19 +83,23 @@ If you used a placeholder URL in Step 2, update it with your actual Render URL.
 ## Troubleshooting
 
 ### CORS Errors
+
 - Make sure `ALLOWED_ORIGINS` in Render includes your exact Netlify URL (with `https://`)
 - Check that `FRONTEND_URL` matches your Netlify URL
 
 ### Invalid Redirect URI
+
 - Ensure the redirect URI in Spotify Dashboard exactly matches `SPOTIFY_REDIRECT_URI` in Render
 - Must include `https://` and the full path `/callback`
 
 ### Environment Variables Not Working
+
 - In Netlify, make sure variables start with `NEXT_PUBLIC_` for client-side access
 - Restart the Netlify build after adding environment variables
 - In Render, make sure to save environment variables and wait for redeploy
 
 ### Backend Not Responding
+
 - Check Render logs for errors
 - Verify all environment variables are set correctly
 - Make sure the service is running (not sleeping on free tier)
@@ -105,6 +109,7 @@ If you used a placeholder URL in Step 2, update it with your actual Render URL.
 For local development, create `.env` files:
 
 **server/.env:**
+
 ```
 SPOTIFY_CLIENT_ID=your_client_id
 SPOTIFY_CLIENT_SECRET=your_client_secret
@@ -116,6 +121,7 @@ NODE_ENV=development
 ```
 
 **app/.env.local:**
+
 ```
 NEXT_PUBLIC_BACKEND_URL=http://localhost:8888
 NEXT_PUBLIC_YOUTUBE_API_KEY=your_youtube_api_key
@@ -127,4 +133,3 @@ NEXT_PUBLIC_YOUTUBE_API_KEY=your_youtube_api_key
 - Netlify free tier has build time limits
 - Make sure to use HTTPS URLs in production (both services provide this)
 - Keep your API keys secure - never commit them to Git
-
