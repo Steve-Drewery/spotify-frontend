@@ -1,0 +1,32 @@
+{
+  "name": "webmash",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next dev",
+    "start:prod": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
+    "@googlemaps/js-api-loader": "^1.16.6",
+    "axios": "^1.7.2",
+    "https-proxy-agent": "^7.0.4",
+    "jquery": "^3.7.1",
+    "next": "^14.2.33",
+    "react": "^18",
+    "react-dom": "^18",
+    "spotify-web-api-js": "^1.5.2"
+  },
+  "devDependencies": {
+    "@types/jquery": "^3.5.30",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "^16.0.4",
+    "typescript": "^5"
+  }
+}

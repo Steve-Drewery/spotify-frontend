@@ -1,0 +1,16 @@
+{
+  "name": "spotify-authorization-code-example",
+  "version": "0.0.2",
+  "description": "Spotify Authorization Code flow example",
+  "author": "Spotify",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "2.8.5",
+    "express": "^4.21.2",
+    "querystring": "~0.2.0"
+  }
+}
