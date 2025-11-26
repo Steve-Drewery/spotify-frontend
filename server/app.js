@@ -17,8 +17,8 @@ var cookieParser = require("cookie-parser");
 // Load environment variables
 var client_id = process.env.SPOTIFY_CLIENT_ID || "d2756b0719ed438fa8c800b20730b123";
 var client_secret = process.env.SPOTIFY_CLIENT_SECRET || "ec323e9f5d6a4eccbc2b13026bb14106";
-var redirect_uri = process.env.SPOTIFY_REDIRECT_URI || "http://localhost:8888/callback";
-var frontend_url = process.env.FRONTEND_URL || "http://localhost:3000";
+var redirect_uri = process.env.SPOTIFY_REDIRECT_URI || "https://spotify-frontend-aaq4.onrender.com/callback";
+var frontend_url = process.env.FRONTEND_URL || "https://spotify-vm.netlify.app";
 var port = process.env.PORT || 8888;
 
 const generateRandomString = (length) => {
@@ -32,7 +32,7 @@ var app = express();
 // Configure CORS to allow requests from frontend
 var allowedOrigins = process.env.ALLOWED_ORIGINS 
   ? process.env.ALLOWED_ORIGINS.split(",")
-  : ["http://localhost:3000", "http://192.168.0.231:3000"];
+  : ["https://spotify-vm.netlify.app", "http://localhost:3000"];
 
 app.use(
   cors({
@@ -58,12 +58,13 @@ app.get("/login", function (req, res) {
   var state = generateRandomString(16);
   
   // Set cookie with proper options for cross-origin requests
-  var isProduction = process.env.NODE_ENV === "production";
+  var isProduction = process.env.NODE_ENV === "production" || process.env.FRONTEND_URL?.includes("https://");
   res.cookie(stateKey, state, {
     httpOnly: true,
     secure: isProduction, // Use secure cookies in production (HTTPS)
     sameSite: isProduction ? "none" : "lax", // Allow cross-site in production
     maxAge: 600000, // 10 minutes
+    domain: isProduction ? undefined : undefined, // Let browser handle domain
   });
 
   // your application requests authorization

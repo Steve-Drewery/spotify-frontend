@@ -109,7 +109,7 @@ export default function Spotify() {
       />
       {!user ? (
         <div className="login">
-          <a className="button" href={`${process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8888"}/login`}>
+          <a className="button" href={`${process.env.NEXT_PUBLIC_BACKEND_URL || "https://spotify-frontend-aaq4.onrender.com"}/login`}>
             Login
           </a>
         </div>
